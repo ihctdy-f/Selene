@@ -1,0 +1,330 @@
+# Calibration Case: 2010 Japan-China Rare Earth Crisis
+## Extracted Historical Parameters
+
+**Status:** Data extracted from sources — ready for calibration runs  
+**Sources:** UN Comtrade, Pew Research, METI, academic papers, news archives
+
+---
+
+## 1. CASE SUMMARY
+
+| Field | Value | Source |
+|-------|-------|--------|
+| **Start Date** | September 7, 2010 | News archives |
+| **Trigger Event** | Fishing boat collision near Senkaku/Diaoyu islands | Multiple |
+| **Peak Restriction** | Late September - October 2010 | Trade data |
+| **Captain Released** | September 24, 2010 | News |
+| **De-escalation** | November 2010 onwards | Trade data |
+| **Near-Normalization** | February 2011 | Trade data |
+| **Japan Policy Response** | ¥100B supplementary budget (Oct 2010) | METI |
+
+---
+
+## 2. START PARAMETERS (September 2010)
+
+### 2.1 State A: Japan
+
+```yaml
+state_a:
+  name: "Japan"
+  gdp_trillion_usd: 5.7  # World Bank 2010
+  regime_type: "democracy"
+  
+  # Leadership
+  leader: "Naoto Kan"
+  leader_tenure_years: 0.25  # Took office June 2010
+  approval_rating: 0.49  # Asahi Shimbun Sept 2010 (49%)
+  
+  # Behavioral parameters (initial estimates)
+  nationalism_index: 0.55  # Elevated but constrained by pacifist norms
+  escalation_threshold: 0.40  # Moderate - DPJ government cautious
+  de_escalation_threshold: 0.35  # Willing to de-escalate quickly
+  retaliation_propensity: 0.25  # Low - released captain under pressure
+  
+  # Economic
+  rare_earth_dependence_on_china: 0.90  # ~90% from METI data
+```
+
+**Notes on Japan parameters:**
+- Approval at 49% (Asahi Sept 2010) rose from 37% in Aug after DPJ leadership election
+- Kan was politically weak (new leader, lost upper house majority in July)
+- Japan released captain on Sept 24 despite domestic criticism → low retaliation propensity
+- Anti-China sentiment ~85% unfavorable (Pew 2008 baseline)
+
+### 2.2 State B: China
+
+```yaml
+state_b:
+  name: "China"
+  gdp_trillion_usd: 6.1  # World Bank 2010 (surpassed Japan this year)
+  regime_type: "autocracy"
+  
+  # Leadership
+  leader: "Hu Jintao"
+  leader_tenure_years: 8  # In power since 2002
+  approval_rating: 0.70  # Not measurable; use default
+  
+  # Behavioral parameters (initial estimates)
+  nationalism_index: 0.70  # Elevated - anniversary of Mukden incident Sept 18
+  escalation_threshold: 0.25  # Low - quick to escalate informally
+  de_escalation_threshold: 0.50  # Slower to back down (face concerns)
+  retaliation_propensity: 0.65  # High - multiple retaliatory measures used
+  
+  # Economic
+  rare_earth_global_share: 0.97  # ~97% of global production
+  rare_earth_export_to_japan_share: 0.33  # Japan ~1/3 of China RE exports
+```
+
+**Notes on China parameters:**
+- Sept 18 = Mukden incident anniversary → nationalism spike
+- China used multiple tools: RE informal embargo, cancelled bilateral meetings, moved drilling equipment to gas fields
+- Anti-Japan protests on Sept 18 (controlled by government)
+- Hu Jintao stable (8 years in power), but domestic pressure to be tough
+
+### 2.3 Sector: Rare Earths
+
+```yaml
+sectors:
+  rare_earths:
+    # Trade flows (2010)
+    a_imports_from_b_tons: 27000  # Japan imported ~27,000 tons/year from China
+    a_imports_from_b_usd_billion: 0.8  # Estimated value pre-price spike
+    
+    # Dependency
+    a_dependency_on_b: 0.90  # Japan 90% dependent on China
+    b_global_production_share: 0.97  # China 97% of world production
+    
+    # Substitution (Japan perspective)
+    a_substitution_time_months: 36  # Actual: took until ~2015 to reach 60%
+    a_substitution_cost_premium: 2.0  # Alternative sources 2x more expensive
+    
+    # Criticality
+    a_criticality_score: 0.95  # Essential for electronics, EVs, defense
+    a_political_salience: 0.80  # High media coverage
+    
+    # Self-harm (China restricting hurts own exporters)
+    b_restriction_self_harm: 0.15  # Some but limited (monopoly power)
+    
+    # Price data
+    price_spike_factor: 10  # Prices rose ~10x (dysprosium: $91→$2377/kg)
+```
+
+### 2.4 Third Parties
+
+```yaml
+third_parties:
+  usa:
+    alignment_with_a: 0.6  # Pro-Japan but initially cautious
+    active_at_start: false
+    intervention_threshold: 0.5
+    notes: "Clinton statement came later; US-Japan alliance invoked"
+    
+  eu:
+    alignment_with_a: 0.2  # Slight Japan lean
+    active_at_start: false
+    intervention_threshold: 0.6
+    notes: "Later joined WTO case (2012)"
+    
+  asean:
+    alignment_with_a: 0.0  # Neutral
+    active_at_start: false
+    intervention_threshold: 0.8
+```
+
+---
+
+## 3. OBSERVED TIMELINE (Friction Estimates)
+
+| Date | Event | Est. Friction | Source |
+|------|-------|---------------|--------|
+| Sept 7 | Collision incident | 0.00 | News |
+| Sept 8 | Captain detained | 0.05 | News |
+| Sept 13-19 | Informal RE slowdown begins | 0.30 | Reuters, industry |
+| Sept 18 | Mukden anniversary protests | — | Context |
+| Sept 19-23 | Customs delays expand to all Japan-bound RE | 0.50 | Trade data |
+| Sept 24 | Japan releases captain | — | News |
+| Sept 25-30 | Restrictions continue despite release | 0.60 | Trade data |
+| Oct 1-15 | Peak restriction period | **0.75** | MOF data: 2246→1278 tons |
+| Oct 16-31 | Slight easing | 0.65 | Trade data |
+| Nov 2010 | Gradual normalization begins | 0.45 | Trade data |
+| Dec 2010 | Continued easing | 0.30 | Trade data |
+| Jan 2011 | Near-normal | 0.20 | Trade data |
+| Feb 2011 | Trade normalized | 0.10 | Trade data |
+
+**Key data point:** Japan MOF data shows imports dropped from 2,246 tons (Sept) to 1,278 tons (Oct) — a 43% decline. This maps to ~0.7-0.8 friction level.
+
+---
+
+## 4. OUTCOME PATTERN TO MATCH
+
+```yaml
+calibration_targets:
+  # Peak friction
+  peak_friction_min: 0.60
+  peak_friction_max: 0.85
+  peak_friction_median: 0.70
+  
+  # Timing
+  steps_to_peak_min: 1  # ~1 month
+  steps_to_peak_max: 2  # ~2 months
+  
+  steps_to_deescalation_min: 2  # ~2 months
+  steps_to_deescalation_max: 4  # ~4 months
+  
+  steps_to_normalization_min: 5  # ~5 months
+  steps_to_normalization_max: 7  # ~7 months
+  
+  # Final outcome distribution (100 runs)
+  outcome_distribution:
+    normalization: 0.60  # Most likely outcome
+    stable_interdependence: 0.25  # Also acceptable
+    managed_competition: 0.10  # Some residual tension
+    escalation_spiral: 0.03  # Rare
+    gradual_decoupling: 0.02  # Rare (didn't fully decouple)
+  
+  # Diversification
+  a_diversification_at_end_min: 0.05  # Japan started diversifying
+  a_diversification_at_end_max: 0.20  # But not complete
+```
+
+---
+
+## 5. NATIONALISM PROXY CALCULATIONS
+
+### Japan Nationalism Index (Sept 2010)
+
+| Indicator | Value | Weight | Contribution |
+|-----------|-------|--------|--------------|
+| Anti-China unfavorable (Pew 2008 baseline) | 85% | 0.30 | 0.255 |
+| Senkaku sovereignty certainty | ~90% | 0.30 | 0.270 |
+| Protest activity | Low | 0.20 | 0.040 |
+| Hawkish Diet statements | Moderate | 0.20 | 0.080 |
+| **Total** | | | **0.55** (normalized) |
+
+### China Nationalism Index (Sept 2010)
+
+| Indicator | Value | Weight | Contribution |
+|-----------|-------|--------|--------------|
+| Anti-Japan unfavorable | ~70% | 0.25 | 0.175 |
+| Mukden anniversary timing | High boost | 0.25 | 0.200 |
+| Protest activity (Sept 18) | Moderate-controlled | 0.25 | 0.150 |
+| Official media hawkishness | High | 0.25 | 0.175 |
+| **Total** | | | **0.70** (normalized) |
+
+---
+
+## 6. CONFIGURATION FILE FOR MODEL
+
+```yaml
+# rare_earth_2010_calibration.yaml
+# Use with: python run_bilateral.py -c config/rare_earth_2010_calibration.yaml
+
+simulation:
+  max_steps: 12  # 12 months (actual crisis was ~6 months)
+  seed: null  # Random for Monte Carlo
+
+state_a:
+  name: "Japan_2010"
+  gdp: 5.7
+  regime_type: "democracy"
+  approval_rating: 0.49
+  nationalism_index: 0.55
+  escalation_threshold: 0.40
+  de_escalation_threshold: 0.35
+  action_threshold: 0.05
+  coercion_hope_coefficient: 0.15
+  retaliation_propensity: 0.25
+  proactive_nationalism_coefficient: 0.10
+  weakness_signal_coefficient: 0.15
+
+state_b:
+  name: "China_2010"
+  gdp: 6.1
+  regime_type: "autocracy"
+  approval_rating: 0.70
+  nationalism_index: 0.70
+  escalation_threshold: 0.25
+  de_escalation_threshold: 0.50
+  action_threshold: 0.03
+  coercion_hope_coefficient: 0.35
+  retaliation_propensity: 0.65
+  proactive_nationalism_coefficient: 0.25
+  weakness_signal_coefficient: 0.30
+
+sectors:
+  rare_earths:
+    a_imports_from_b: 0.8  # $B
+    b_exports_to_a: 0.8
+    a_dependency_on_b: 0.90
+    b_dependency_on_a: 0.05  # Low - China had monopoly
+    a_substitution_time: 36
+    b_substitution_time: 12
+    a_substitution_cost: 2.0
+    b_substitution_cost: 1.1
+    a_criticality_score: 0.95
+    b_criticality_score: 0.30
+    a_political_salience: 0.80
+    b_political_salience: 0.60
+
+third_parties:
+  usa:
+    alignment_with_a: 0.6
+    intervention_friction_threshold: 0.5
+    coordination_bonus: 0.15
+    alternative_supply_capacity: 0.05  # Low in 2010
+  eu:
+    alignment_with_a: 0.2
+    intervention_friction_threshold: 0.6
+    coordination_bonus: 0.05
+    alternative_supply_capacity: 0.02
+
+shock_probabilities:
+  territorial_incident: 0.02  # Already happened
+  election: 0.00  # No major elections during window
+  leadership_change: 0.01
+  economic_recession: 0.02
+  commodity_price_shock: 0.05  # RE prices spiking
+  military_exercise: 0.02
+```
+
+---
+
+## 7. SOURCES
+
+1. **Trade Data:**
+   - Japan MOF: Imports dropped 2,246 → 1,278 tons (Sept→Oct 2010)
+   - Sasakawa Peace Foundation: "imports of rare earths from China plummeted"
+
+2. **Price Data:**
+   - Dysprosium oxide: $91/kg (Jan 2009) → $2,377/kg (Aug 2011)
+   - Cerium oxide: $4.7/kg (Apr 2010) → $36/kg (Oct 2010)
+
+3. **Political Data:**
+   - Kan approval: 49% (Asahi, Sept 2010)
+   - Japan anti-China: 85% unfavorable (Pew 2008)
+   - China anti-Japan: ~70% unfavorable (Genron)
+
+4. **Policy Response:**
+   - Japan: ¥100B supplementary budget (Oct 2010)
+   - Japan diversification target: reduce China dependence from 90% to 60%
+   - Actual result by 2015: 54% dependence (from 82% in 2010)
+
+5. **Academic:**
+   - CEPR analysis of UN Comtrade data
+   - Global Asia: "China's Rare-Earth Resource Nationalism"
+   - East Asia Forum: "Did China really ban rare earth metals exports?"
+
+---
+
+## 8. NEXT STEPS
+
+1. [ ] Run calibration with these parameters (500 runs)
+2. [ ] Compare output distribution to targets
+3. [ ] Tune: escalation_threshold, coercion_coefficient, de_escalation_threshold
+4. [ ] Document final calibrated values
+5. [ ] Validate on 2012 Senkaku case (out-of-sample)
+
+---
+
+*Extracted: January 2026*
+*Model version: selene_bilateral v0.1*

@@ -1,0 +1,67 @@
+# Selene Bilateral Friction - High Tension Scenario
+# Elevated nationalism, aggressive postures, frequent shocks
+
+scenario_name: "japan_china_high_tension"
+description: "High tension scenario - elevated nationalism and aggressive postures"
+
+simulation:
+  max_steps: 48
+  steps_per_month: 1
+  decision_noise: 0.03       # Less noise = more predictable escalation
+
+decision:
+  coercion_coefficient: 0.4      # Higher belief in coercion
+  domestic_boost_coefficient: 0.3 # Stronger domestic incentives
+  signaling_coefficient: 0.2
+  retaliation_fear_coefficient: 0.3  # Less fear of retaliation
+  reputation_coefficient: 0.05
+  pain_relief_coefficient: 0.3    # Less willing to back down
+  relationship_coefficient: 0.1
+  weakness_signal_coefficient: 0.35  # High cost to backing down
+  action_cooldown: 1              # Faster reactions
+  action_threshold: 0.03          # Lower bar for action
+  diversification_rate: 0.025     # Faster decoupling
+  third_party_activation_multiplier: 1.3
+  third_party_cooldown: 4
+
+state_a:
+  agent_id: "JPN"
+  name: "Japan"
+  gdp: 4.2
+  trade_openness: 0.35
+  regime_type: "democracy"
+  leader_tenure: 1              # New hawkish leader
+  approval_rating: 0.55
+  nationalism_index: 0.7        # Elevated nationalism
+  escalation_threshold: 0.25    # Quicker to escalate
+  de_escalation_threshold: 0.7  # Harder to back down
+  signaling_preference: 0.5
+  retaliation_propensity: 0.75
+
+state_b:
+  agent_id: "CHN"
+  name: "China"
+  gdp: 17.7
+  trade_openness: 0.38
+  regime_type: "autocracy"
+  leader_tenure: 12
+  approval_rating: 0.65
+  nationalism_index: 0.75       # Elevated nationalism
+  escalation_threshold: 0.2     # Very quick to escalate
+  de_escalation_threshold: 0.75
+  signaling_preference: 0.7
+  retaliation_propensity: 0.85
+
+shock_probabilities:
+  territorial_incident: 0.04    # Double baseline
+  military_exercise: 0.08
+  diplomatic_statement: 0.1
+  election: 0.01
+  leadership_change: 0.005
+  public_scandal: 0.04
+  economic_recession: 0.01
+  commodity_spike: 0.03
+  third_party_action: 0.06
+  historical_anniversary: 0.05
+  tech_breakthrough: 0.01
+  supply_disruption: 0.03

@@ -1,0 +1,53 @@
+# Project Selene - Weak Poison Pill Variant
+scenario_name: "Project Selene - Weak Pill"
+
+max_phases: 13
+poison_pill_threshold: 1      # Only triggers if down to 1 agent
+cascade_on_withdrawal: false  # No automatic cascade
+
+initial_volatility: 0.15
+initial_economic_stress: 0.15
+initial_technical_risk: 0.10
+trust_modifier: 0.0
+
+agents:
+  - agent_id: "EU_ESA"
+    agent_type: "track_a_core"
+    trust_level: 0.55
+    public_approval: 0.60
+    leadership_stability: 0.70
+    
+  - agent_id: "China_CNSA"
+    agent_type: "track_b_core"
+    trust_level: 0.45
+    public_approval: 0.75
+    leadership_stability: 0.85
+    
+  - agent_id: "Russia_Roscosmos"
+    agent_type: "track_b_core"
+    trust_level: 0.35
+    public_approval: 0.65
+    leadership_stability: 0.60
+    
+  - agent_id: "India_ISRO"
+    agent_type: "associate"
+    trust_level: 0.50
+    public_approval: 0.70
+    leadership_stability: 0.65
+    
+  - agent_id: "Japan_JAXA"
+    agent_type: "associate"
+    trust_level: 0.60
+    public_approval: 0.55
+    leadership_stability: 0.70
+
+shocks:
+  election_cycle_months: 48
+  base_crisis_probability: 0.10
+  leadership_change_probability: 0.08
+  technical_failure_probability: 0.05
+  economic_shock_probability: 0.08
+
+dependency_chain:
+  coupling_strength: 0.4       # Weaker coupling
+  cascade_threshold: 0.6       # Higher threshold (harder to cascade)

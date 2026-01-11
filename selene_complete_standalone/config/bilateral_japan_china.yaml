@@ -1,0 +1,59 @@
+# Bilateral Friction Scenario - Japan-China
+scenario_name: "Japan-China Bilateral Friction"
+
+# Bilateral-specific parameters
+bilateral_mode: true
+state_a: "Japan"
+state_b: "China"
+
+# Initial conditions
+initial_friction: 0.45
+initial_cooperation: 0.35
+economic_interdependence: 0.65
+
+# State A (Japan) parameters
+state_a_config:
+  regime_type: "democratic"
+  public_opinion_sensitivity: 0.7
+  economic_dependency_on_b: 0.35
+  nationalist_pressure: 0.4
+  alliance_commitment: 0.8       # US alliance
+  
+# State B (China) parameters  
+state_b_config:
+  regime_type: "authoritarian"
+  public_opinion_sensitivity: 0.3
+  economic_dependency_on_a: 0.25
+  nationalist_pressure: 0.5
+  alliance_commitment: 0.2
+
+# Sector dependencies (from calibration)
+sectors:
+  - name: "rare_earth"
+    a_depends_on_b: 0.85
+    b_depends_on_a: 0.10
+    criticality: 0.9
+    
+  - name: "automotive_parts"
+    a_depends_on_b: 0.40
+    b_depends_on_a: 0.55
+    criticality: 0.7
+    
+  - name: "electronics"
+    a_depends_on_b: 0.50
+    b_depends_on_a: 0.45
+    criticality: 0.8
+
+# Third party (US) configuration
+third_party:
+  active: true
+  name: "United_States"
+  alliance_with_a: true
+  pressure_threshold: 0.7
+  intervention_probability: 0.3
+
+# Shock parameters
+shocks:
+  territorial_dispute_probability: 0.08
+  trade_friction_probability: 0.10
+  historical_issue_probability: 0.06

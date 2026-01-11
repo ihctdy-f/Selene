@@ -1,0 +1,54 @@
+# Bilateral Friction Scenario - US-China
+scenario_name: "US-China Bilateral Friction"
+
+bilateral_mode: true
+state_a: "United_States"
+state_b: "China"
+
+initial_friction: 0.55
+initial_cooperation: 0.30
+economic_interdependence: 0.55
+
+state_a_config:
+  regime_type: "democratic"
+  public_opinion_sensitivity: 0.6
+  economic_dependency_on_b: 0.30
+  nationalist_pressure: 0.5
+  alliance_commitment: 0.0       # Self (hegemon)
+  
+state_b_config:
+  regime_type: "authoritarian"
+  public_opinion_sensitivity: 0.25
+  economic_dependency_on_a: 0.40
+  nationalist_pressure: 0.6
+  alliance_commitment: 0.2
+
+sectors:
+  - name: "semiconductors"
+    a_depends_on_b: 0.35
+    b_depends_on_a: 0.75
+    criticality: 0.95
+    
+  - name: "consumer_electronics"
+    a_depends_on_b: 0.70
+    b_depends_on_a: 0.25
+    criticality: 0.6
+    
+  - name: "rare_earth"
+    a_depends_on_b: 0.80
+    b_depends_on_a: 0.05
+    criticality: 0.85
+    
+  - name: "financial_services"
+    a_depends_on_b: 0.15
+    b_depends_on_a: 0.55
+    criticality: 0.7
+
+third_party:
+  active: false    # No third party in superpower dyad
+
+shocks:
+  tech_decoupling_probability: 0.12
+  trade_war_probability: 0.10
+  taiwan_crisis_probability: 0.05
+  financial_friction_probability: 0.08

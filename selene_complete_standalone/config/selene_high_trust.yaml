@@ -1,0 +1,53 @@
+# Project Selene - High Trust Scenario
+scenario_name: "Project Selene - High Trust"
+
+max_phases: 13
+poison_pill_threshold: 2
+cascade_on_withdrawal: true
+
+initial_volatility: 0.08
+initial_economic_stress: 0.10
+initial_technical_risk: 0.08
+trust_modifier: 0.20
+
+agents:
+  - agent_id: "EU_ESA"
+    agent_type: "track_a_core"
+    trust_level: 0.75
+    public_approval: 0.70
+    leadership_stability: 0.80
+    
+  - agent_id: "China_CNSA"
+    agent_type: "track_b_core"
+    trust_level: 0.65
+    public_approval: 0.80
+    leadership_stability: 0.90
+    
+  - agent_id: "Russia_Roscosmos"
+    agent_type: "track_b_core"
+    trust_level: 0.55
+    public_approval: 0.70
+    leadership_stability: 0.70
+    
+  - agent_id: "India_ISRO"
+    agent_type: "associate"
+    trust_level: 0.70
+    public_approval: 0.75
+    leadership_stability: 0.75
+    
+  - agent_id: "Japan_JAXA"
+    agent_type: "associate"
+    trust_level: 0.80
+    public_approval: 0.65
+    leadership_stability: 0.80
+
+shocks:
+  election_cycle_months: 48
+  base_crisis_probability: 0.06
+  leadership_change_probability: 0.05
+  technical_failure_probability: 0.03
+  economic_shock_probability: 0.05
+
+dependency_chain:
+  coupling_strength: 0.6
+  cascade_threshold: 0.4

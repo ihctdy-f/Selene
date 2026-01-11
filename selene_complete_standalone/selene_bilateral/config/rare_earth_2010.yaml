@@ -1,0 +1,48 @@
+# rare_earth_2010.yaml
+# Historical calibration case: 2010 Japan-China Rare Earth Crisis
+# Use with: python run_bilateral.py -c calibration/rare_earth_2010/rare_earth_2010.yaml -n 500
+
+simulation:
+  max_steps: 12  # 12 months - crisis was ~6 months acute
+  
+state_a:
+  name: "Japan_2010"
+  nationalism_index: 0.55
+  approval_rating: 0.49
+  escalation_threshold: 0.40
+  de_escalation_threshold: 0.35
+  action_threshold: 0.05
+  coercion_hope_coefficient: 0.15
+  weakness_signal_coefficient: 0.15
+  proactive_nationalism_coefficient: 0.10
+  action_cooldown: 2
+
+state_b:
+  name: "China_2010"
+  nationalism_index: 0.70
+  approval_rating: 0.70
+  escalation_threshold: 0.25
+  de_escalation_threshold: 0.50
+  action_threshold: 0.03
+  coercion_hope_coefficient: 0.35
+  weakness_signal_coefficient: 0.30
+  proactive_nationalism_coefficient: 0.25
+  action_cooldown: 1
+
+shock_probabilities:
+  territorial_incident: 0.01
+  military_exercise: 0.02
+  election: 0.00
+  leadership_change: 0.01
+  economic_recession: 0.02
+  commodity_price_shock: 0.08
+  cyber_incident: 0.01
+  historical_anniversary: 0.05
+
+third_parties:
+  usa:
+    alignment_with_a: 0.6
+    intervention_friction_threshold: 0.5
+  eu:
+    alignment_with_a: 0.2
+    intervention_friction_threshold: 0.6

@@ -1,0 +1,67 @@
+# Selene Bilateral Friction - Stabilization Scenario
+# Strong economic incentives, pragmatic leaders, active mediation
+
+scenario_name: "japan_china_stabilization"
+description: "Stabilization scenario - pragmatic leadership, strong economic ties, active mediation"
+
+simulation:
+  max_steps: 48
+  steps_per_month: 1
+  decision_noise: 0.06
+
+decision:
+  coercion_coefficient: 0.2      # Less belief in coercion
+  domestic_boost_coefficient: 0.15
+  signaling_coefficient: 0.1
+  retaliation_fear_coefficient: 0.5  # High fear of escalation
+  reputation_coefficient: 0.15
+  pain_relief_coefficient: 0.6    # More willing to de-escalate
+  relationship_coefficient: 0.35  # Value relationship highly
+  weakness_signal_coefficient: 0.1  # Low audience costs
+  action_cooldown: 3              # Slower reactions
+  action_threshold: 0.08          # Higher bar for action
+  diversification_rate: 0.01      # Slow decoupling
+  third_party_activation_multiplier: 0.8
+  third_party_cooldown: 8
+
+state_a:
+  agent_id: "JPN"
+  name: "Japan"
+  gdp: 4.2
+  trade_openness: 0.4            # Higher trade openness
+  regime_type: "democracy"
+  leader_tenure: 5
+  approval_rating: 0.55
+  nationalism_index: 0.35        # Lower nationalism
+  escalation_threshold: 0.45     # Slower to escalate
+  de_escalation_threshold: 0.4   # Easier to back down
+  signaling_preference: 0.3
+  retaliation_propensity: 0.5
+
+state_b:
+  agent_id: "CHN"
+  name: "China"
+  gdp: 17.7
+  trade_openness: 0.42
+  regime_type: "autocracy"
+  leader_tenure: 8
+  approval_rating: 0.75
+  nationalism_index: 0.45        # Lower nationalism
+  escalation_threshold: 0.4
+  de_escalation_threshold: 0.45
+  signaling_preference: 0.4
+  retaliation_propensity: 0.55
+
+shock_probabilities:
+  territorial_incident: 0.01    # Half baseline
+  military_exercise: 0.03
+  diplomatic_statement: 0.06
+  election: 0.01
+  leadership_change: 0.003
+  public_scandal: 0.02
+  economic_recession: 0.015     # Slightly higher (tests resilience)
+  commodity_spike: 0.015
+  third_party_action: 0.03
+  historical_anniversary: 0.02
+  tech_breakthrough: 0.02       # Higher (reduces tension)
+  supply_disruption: 0.01
